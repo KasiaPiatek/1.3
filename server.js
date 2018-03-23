@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
-var bodyParser = require('bodyParser');
+var bodyParser = require('body-parser');
 var stringifyFile = '';
 
 app.use(bodyParser.json()); /* wykorzystuje middleware body-parser*/
@@ -18,8 +18,9 @@ app.get('/getNote', function (req, res) {
 
 
 app.post('/updateNote/:note', function (req, res) {
-fs.writeFile('./test.json', stringifyFile, function(err) {
-    If (err) throw err;
+	var stringiFile = stringifyFile + req.params.note;
+fs.writeFile('./test.json', stringiFile, function(err) {
+    if (err) throw err;
     console.log('file updated');
 });
 });
